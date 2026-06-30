@@ -31,3 +31,7 @@ functions:
           path: /apod
           method: get
           cors: true
+      - http:
+          path: /apod/{date}
+          method: get
+          cors: true
