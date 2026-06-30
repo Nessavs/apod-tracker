@@ -1,0 +1,7 @@
+package-lock.json linguist-generated=true
+
+*.json linguist-detectable=false
+*.yml linguist-detectable=false
+*.yaml linguist-detectable=false
+
+*.ts linguist-detectable=true
