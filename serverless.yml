@@ -1,0 +1,33 @@
+service: apod-tracker
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  memorySize: 256
+  timeout: 30
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    target: node22
+    platform: node
+
+functions:
+  apodApi:
+    handler: src/handlers/apod-api.handler
+    description: API HTTP para foto do dia da NASA
+    events:
+      - http:
+          path: /apod
+          method: get
+          cors: true
