@@ -2,6 +2,7 @@ import { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda';
 import { ZodError } from 'zod';
 import { fetchApod } from '@/services/nasa.service';
 import { dateParamSchema } from '@/schemas/apod.schema';
+import { logger } from '@/utils/logger';
 
 function response(statusCode: number, body: unknown): APIGatewayProxyResult {
   return {
@@ -14,11 +15,9 @@ function response(statusCode: number, body: unknown): APIGatewayProxyResult {
   };
 }
 
-/**
- * GET /apod          -> foto de hoje
- * GET /apod/{date}   -> foto de uma data específica (YYYY-MM-DD)
- */
 export const handler: APIGatewayProxyHandler = async (event) => {
+  const requestLogger = logger.child({ path: event.path, method: event.httpMethod });
+
   try {
     let date: string | undefined;
 
@@ -29,15 +28,16 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
     const photo = await fetchApod(date);
 
+    requestLogger.info({ date: date ?? 'today' }, 'Request completed');
+
     return response(200, photo);
   } catch (error) {
     if (error instanceof ZodError) {
-      return response(400, {
-        message: 'Validation failed',
-        issues: error.issues,
-      });
+      requestLogger.warn({ issues: error.issues }, 'Validation failed');
+      return response(400, { message: 'Validation failed', issues: error.issues });
     }
 
+    requestLogger.error({ err: error }, 'Unexpected error');
     return response(500, { message: 'Internal server error' });
   }
 };

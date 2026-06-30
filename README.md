@@ -27,7 +27,7 @@ Personal study project for learning TypeScript with a serverless AWS stack, cons
 ### Roadmap
 
 - [x] **Phase 1**: TS + Serverless + HTTP Lambda
-- [ ] **Phase 2**: Zod validation + NASA API integration
+- [x] **Phase 2**: Zod validation + NASA API integration
 - [ ] **Phase 3**: Mongoose + MongoDB + favorites CRUD
 - [ ] **Phase 4**: Redis cache
 - [ ] **Phase 5**: Scheduled Lambda (EventBridge cron)
@@ -89,7 +89,7 @@ Projeto pessoal de estudo para aprender TypeScript com stack serverless AWS, con
 ### Roadmap
 
 - [x] **Fase 1**: TS + Serverless + Lambda HTTP
-- [ ] **Fase 2**: Validação Zod + integração com NASA API
+- [x] **Fase 2**: Validação Zod + integração com NASA API
 - [ ] **Fase 3**: Mongoose + MongoDB + CRUD de favoritas
 - [ ] **Fase 4**: Cache com Redis
 - [ ] **Fase 5**: Lambda agendada (EventBridge cron)

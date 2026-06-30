@@ -26,7 +26,7 @@ export type ApodPhoto = z.output<typeof nasaApodResponseSchema>;
 export const dateParamSchema = z.object({
   date: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Data deve estar no formato YYYY-MM-DD'),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in YYYY-MM-DD format'),
 });
 
 export type DateParam = z.infer<typeof dateParamSchema>;
