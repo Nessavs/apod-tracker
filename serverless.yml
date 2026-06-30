@@ -13,6 +13,11 @@ provider:
   stage: ${opt:stage, 'dev'}
   memorySize: 256
   timeout: 30
+  environment:
+    NASA_API_KEY: ${env:NASA_API_KEY}
+    NASA_API_URL: ${env:NASA_API_URL}
+
+useDotenv: true
 
 custom:
   esbuild:
